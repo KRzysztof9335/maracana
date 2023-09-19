@@ -20,7 +20,6 @@ def process_league(web_driver: webdriver.Firefox, league: str):
     # Read DB and update already scrapped matches with status ONGOING
     next_fixtures = scrapers.flash.get_next_fixtures(web_driver, league)
     # Get next matches
-    #
     pass
 
 
