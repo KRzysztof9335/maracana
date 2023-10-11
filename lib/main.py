@@ -18,7 +18,7 @@ import scrapers.flash
 def process_league(web_driver: webdriver.Firefox, league: str):
     logging.info(f"Processing league {league}")
     # Read DB and update already scrapped matches with status ONGOING
-    next_fixtures = scrapers.flash.get_next_fixtures(web_driver, league)
+    #next_fixtures = scrapers.flash.get_next_fixtures(web_driver, league)
     # Get next matches
     pass
 
@@ -31,9 +31,10 @@ def get_web_driver() -> webdriver.Firefox:
 
 def main():
     "Main function to control"
-    web_driver = get_web_driver()
-    for league in consts.LEAGUES:
-        process_league(web_driver, league)
+    # web_driver = get_web_driver()
+    # for league in consts.LEAGUES:
+    #     process_league(web_driver, league)
+
 
 
 
