@@ -19,3 +19,5 @@ SCRAP_LIMIT = 10  # No more matches to be scrapped at one session per league
 TODAY = datetime.date.today()
 # https://www.flashscore.com/football/germany/bundesliga/fixtures/
 # https://www.flashscore.com/football/france/ligue-1/#/Q1sSPOn5/table/overall
+
+RADIATOR_PAGE = "/home/krzysztof/Desktop/radiator.html"  # TODO: change to non static
