@@ -4,13 +4,13 @@ User should provide input in the following way:
 1) Provide two teams for which forecasting will be performed (ongoing)
 2) Provide a day and for all matches forecasting will be performed (future)
 """
-from typing import Dict, List, Any, Set
+# from typing import Dict, List, Any, Set
 from selenium import webdriver
 
 import logging
 
-import consts
-import scrapers.flash
+# import lib.consts
+# import lib.scrapers.flash
 
 
 
