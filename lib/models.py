@@ -4,6 +4,7 @@ from typing import List, Dict, Union
 
 import hashlib
 import logging
+import time
 
 class Participant(Enum):
     HOME = "home"
@@ -27,14 +28,20 @@ class PredictionEvents(Enum):
 
 @dataclass
 class Prediction:
-    id: str
     name: PredictionEvents
-    probability: float
+    probability: float  # in percentage
     course: float = 1.1
     expected: bool = True
     real: Union[None, bool] = None
     guessed: Union[None, bool] = None
+    id: str = field(init=False)
 
+    def __post_init__(self):
+        to_hash = str(time.time_ns())
+        self.id = hashlib.sha256(to_hash.encode('utf-8')).hexdigest()[0:20]
+
+        if self.probability > 100 or self.probability < 0:
+            raise ValueError(f"Provided wrong probability {self.probability}")
 
     def update_prediction(self, value: bool) -> None:
         self.real = value
@@ -103,9 +110,6 @@ class Match:
 
     def add_prediction(self, prediction: Prediction):
         "Add prediction"
-        if prediction.id in self.predictions.keys():
-            logging.warning(f"For match {self.repr_short()}: cannot add {prediction}")
-            return
         self.predictions[prediction.id] = prediction
 
     def update_prediction(self, id: str, value: bool):
