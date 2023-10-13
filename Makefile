@@ -8,6 +8,7 @@ dirs := $(root)/lib
 
 pylint := $(venv)/bin/pylint
 pycodestyle := $(venv)/bin/pycodestyle
+pycoverage := $(venv)/bin/coverage
 
 venv: $(venv)/timestamp
 $(venv)/timestamp: $(requirements)
@@ -23,6 +24,12 @@ pylint: venv
 pycodestyle: venv
 	$(pycodestyle) $(dirs) --ignore=E501  # Ignore too long line
 
+pycoverage: venv
+	$(pycoverage) run -m pytest
+	$(pycoverage) report -m --omit=*/tests/*,__init__.py --skip-empty --skip-covered | tee $(root)/.coverage_report.txt
+	@grep -E "TOTAL\s+181\s+58\s+68%" $(root)/.coverage_report.txt
+
 static: pylint pycodestyle
+dynamic: pycoverage
 
 test: static
